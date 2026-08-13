@@ -1,0 +1,72 @@
+import React from "react";
+
+import { NavLink } from "react-router-dom";
+
+import "./Navbar.css";
+
+
+function Navbar() {
+
+    return (
+
+        <nav className="navbar">
+
+            <NavLink
+                to="/"
+                className="navbar-logo"
+            >
+
+                <div className="navbar-logo-box">
+                    S
+                </div>
+
+                <div className="navbar-logo-text">
+
+                    <span>
+                        Student
+                    </span>
+
+                    <strong>
+                        Portal
+                    </strong>
+
+                </div>
+
+            </NavLink>
+
+
+            <div className="navbar-links">
+
+                <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                        isActive
+                            ? "nav-link active"
+                            : "nav-link"
+                    }
+                >
+                    Dashboard
+                </NavLink>
+
+
+                <NavLink
+                    to="/add-student"
+                    className={({ isActive }) =>
+                        isActive
+                            ? "nav-link active"
+                            : "nav-link"
+                    }
+                >
+                    Add Student
+                </NavLink>
+
+            </div>
+
+        </nav>
+
+    );
+
+}
+
+
+export default Navbar;
