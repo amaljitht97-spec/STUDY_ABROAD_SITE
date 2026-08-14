@@ -11,8 +11,20 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 from pathlib import Path
+
 import os
 import dj_database_url
+
+import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+import dj_database_url
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / ".env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,20 +41,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ALLOWED_HOSTS = []
 
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY",
-    "django-insecure-development-key"
-)
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = os.environ.get(
-    "DEBUG",
-    "True"
-) == "True"
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
 ]
+
+if os.environ.get("RENDER_EXTERNAL_HOSTNAME"):
+    ALLOWED_HOSTS.append(
+        os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+    )
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get(
     "RENDER_EXTERNAL_HOSTNAME"
@@ -114,16 +125,13 @@ WSGI_APPLICATION = 'studyabroad.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
+import os
+import dj_database_url
+
 DATABASES = {
-
-    "default": dj_database_url.config(
-
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-
-        conn_max_age=600,
-
+    "default": dj_database_url.parse(
+        os.environ.get("DATABASE_URL")
     )
-
 }
 
 
@@ -173,13 +181,16 @@ MAILERS = {
     },
 }
 
+
 CORS_ALLOWED_ORIGINS = [
-
     "http://localhost:5173",
-
     "http://localhost:5174",
 
+    "https://study-abroad-site.vercel.app",
+
+    "https://study-abroad-site-8bg5eimyw-amal-a074.vercel.app",
 ]
+
 
 STATIC_URL = "/static/"
 
@@ -188,3 +199,12 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = (
     "whitenoise.storage.CompressedManifestStaticFilesStorage"
 )
+
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+import dj_database_url
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / ".env")
