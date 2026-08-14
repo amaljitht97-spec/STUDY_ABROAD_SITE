@@ -208,3 +208,11 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(BASE_DIR / ".env")
+
+
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://study-abroad-site.vercel.app",
+    "https://study-abroad-site-8bg5eimyw-amal-a074.vercel.app",
+    "https://study-abroad-site-ewr3o655b-amal-a074.vercel.app",
+]
