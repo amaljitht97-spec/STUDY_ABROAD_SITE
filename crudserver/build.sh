@@ -2,6 +2,8 @@
 
 set -o errexit
 
-python manage.py collectstatic --no-input
+pip install -r studyabroad/requirements.txt
 
-python manage.py migrate
+python studyabroad/manage.py collectstatic --no-input
+
+python studyabroad/manage.py migrate
